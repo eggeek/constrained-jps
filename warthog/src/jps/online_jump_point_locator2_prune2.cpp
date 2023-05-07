@@ -395,10 +395,10 @@ jlp::jump_northeast(
 	if((neis & 1542) != 1542) { return; }
 
   G::cur_diag_gval = pa->get_g();
-  jp->v.init_before_diag(jps::NORTH, jps::EAST);
-  jp->h.init_before_diag(jps::EAST, jps::NORTH);
-  jp->setup(jp->v, jp->north.ga, jp->north.gb, jp->north.dC);
-  jp->setup(jp->h, jp->east.ga, jp->east.gb, jp->east.dC);
+  // jp->v.init_before_diag(jps::NORTH, jps::EAST);
+  // jp->h.init_before_diag(jps::EAST, jps::NORTH);
+  // jp->setup(jp->v, jp->north.ga, jp->north.gb, jp->north.dC);
+  // jp->setup(jp->h, jp->east.ga, jp->east.gb, jp->east.dC);
 
 	while(node_id != warthog::INF32)
 	{
@@ -456,39 +456,39 @@ jlp::__jump_northeast(
 	uint32_t rmapw = rmap_->width();
 	uint32_t mapw = map_->width();
 
-  if (jp->v.dominated() || jp->h.dominated()) {
-    jumpnode_id = warthog::INF32; jumpcost = 0; return;
-  }
+  // if (jp->v.dominated() || jp->h.dominated()) {
+  //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+  // }
 	while(true)
 	{
 		num_steps++;
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id - mapw + 1;
 		rnode_id = rnode_id + rmapw + 1;
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
-    if ((!jp->v.next()) || (!jp->h.next())) {
-      jumpnode_id = warthog::INF32; jumpcost = 0; return;
-    }
+    // if ((!jp->v.next()) || (!jp->h.next())) {
+    //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+    // }
 		// recurse straight before stepping again diagonally;
 		// (ensures we do not miss any optimal turning points)
-    jp->before_scanv(rmap_, rnode_id, 1);
+    // jp->before_scanv(rmap_, rnode_id, 1);
 		__jump_north(rnode_id, rgoal_id, jp_id1, cost1, rmap_);
     jp->jumpcost = cost1;
-    if (!jp->after_scanv(rmap_, node_id-jp->jump_step*mapw, jp_id1, cost1)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanv(rmap_, node_id-jp->jump_step*mapw, jp_id1, cost1)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 
 
-    jp->before_scanh(map_, node_id, 1);
+    // jp->before_scanh(map_, node_id, 1);
 		__jump_east(node_id, goal_id, jp_id2, cost2, map_);
     jp->jumpcost = cost2;
-    if (!jp->after_scanh(map_, node_id+jp->jump_step, jp_id2, cost2)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanh(map_, node_id+jp->jump_step, jp_id2, cost2)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 		if((jp_id1 & jp_id2) != warthog::INF32) { break; }
 
 		// couldn't move in either straight dir; node_id is an obstacle
@@ -531,11 +531,11 @@ jlp::jump_northwest(
 	if((neis & 771) != 771) { return; }
 
   G::cur_diag_gval = pa->get_g();
-  jp->v.init_before_diag(jps::NORTH, jps::WEST);
-  jp->h.init_before_diag(jps::WEST, jps::NORTH);
-
-  jp->setup(jp->v, jp->north.ga, jp->north.gb, jp->north.dC);
-  jp->setup(jp->h, jp->west.ga, jp->west.gb, jp->west.dC);
+  // jp->v.init_before_diag(jps::NORTH, jps::WEST);
+  // jp->h.init_before_diag(jps::WEST, jps::NORTH);
+  //
+  // jp->setup(jp->v, jp->north.ga, jp->north.gb, jp->north.dC);
+  // jp->setup(jp->h, jp->west.ga, jp->west.gb, jp->west.dC);
 
 	while(node_id != warthog::INF32)
 	{
@@ -593,38 +593,38 @@ jlp::__jump_northwest(
 	uint32_t rmapw = rmap_->width();
 	uint32_t mapw = map_->width();
 
-  if (jp->v.dominated() || jp->h.dominated()) {
-    jumpnode_id = warthog::INF32; jumpcost = 0; return;
-  }
+  // if (jp->v.dominated() || jp->h.dominated()) {
+  //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+  // }
 	while(true)
 	{
 		num_steps++;
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id - mapw - 1;
 		rnode_id = rnode_id - (rmapw - 1);
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
-    if ((!jp->v.next()) || (!jp->h.next())) {
-      jumpnode_id = warthog::INF32; jumpcost = 0; return;
-    }
+    // if ((!jp->v.next()) || (!jp->h.next())) {
+    //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+    // }
 		// recurse straight before stepping again diagonally;
 		// (ensures we do not miss any optimal turning points)
-    jp->before_scanv(rmap_,  rnode_id, 1);
+    // jp->before_scanv(rmap_,  rnode_id, 1);
 		__jump_north(rnode_id, rgoal_id, jp_id1, cost1, rmap_);
     jp->jumpcost = cost1;
-    if (!jp->after_scanv(rmap_, node_id-jp->jump_step*mapw, jp_id1, cost1)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanv(rmap_, node_id-jp->jump_step*mapw, jp_id1, cost1)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 
-    jp->before_scanh(map_, node_id, -1);
+    // jp->before_scanh(map_, node_id, -1);
 		__jump_west(node_id, goal_id, jp_id2, cost2, map_);
     jp->jumpcost = cost2;
-    if (!jp->after_scanh(map_, node_id-jp->jump_step, jp_id2, cost2)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanh(map_, node_id-jp->jump_step, jp_id2, cost2)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 
 		if((jp_id1 & jp_id2) != warthog::INF32) { break; }
 		// couldn't move in either straight dir; node_id is an obstacle
@@ -664,10 +664,10 @@ jlp::jump_southeast(
 	if((neis & 394752) != 394752) { return; }
 
   G::cur_diag_gval = pa->get_g();
-  jp->v.init_before_diag(jps::SOUTH, jps::EAST);
-  jp->h.init_before_diag(jps::EAST, jps::SOUTH);
-  jp->setup(jp->v, jp->south.ga, jp->south.gb, jp->south.dC);
-  jp->setup(jp->h, jp->east.ga, jp->east.gb, jp->east.dC);
+  // jp->v.init_before_diag(jps::SOUTH, jps::EAST);
+  // jp->h.init_before_diag(jps::EAST, jps::SOUTH);
+  // jp->setup(jp->v, jp->south.ga, jp->south.gb, jp->south.dC);
+  // jp->setup(jp->h, jp->east.ga, jp->east.gb, jp->east.dC);
 
 	while(node_id != warthog::INF32)
 	{
@@ -725,38 +725,38 @@ jlp::__jump_southeast(
 	uint32_t rmapw = rmap_->width();
 	uint32_t mapw = map_->width();
 
-  if (jp->v.dominated() || jp->h.dominated()) {
-    jumpnode_id = warthog::INF32; jumpcost = 0; return;
-  }
+  // if (jp->v.dominated() || jp->h.dominated()) {
+  //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+  // }
 	while(true)
 	{
 		num_steps++;
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id + mapw + 1;
 		rnode_id = rnode_id + rmapw - 1;
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
-    if ((!jp->v.next()) || (!jp->h.next())) {
-      jumpnode_id = warthog::INF32; jumpcost = 0; return;
-    }
+    // if ((!jp->v.next()) || (!jp->h.next())) {
+    //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+    // }
 		// recurse straight before stepping again diagonally;
 		// (ensures we do not miss any optimal turning points)
-    jp->before_scanv(rmap_, rnode_id, -1);
+    // jp->before_scanv(rmap_, rnode_id, -1);
 		__jump_south(rnode_id, rgoal_id, jp_id1, cost1, rmap_);
     jp->jumpcost = cost1;
-    if (!jp->after_scanv(rmap_, node_id+jp->jump_step*mapw, jp_id1, cost1)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanv(rmap_, node_id+jp->jump_step*mapw, jp_id1, cost1)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 
-    jp->before_scanh(map_, node_id, 1);
+    // jp->before_scanh(map_, node_id, 1);
 		__jump_east(node_id, goal_id, jp_id2, cost2, map_);
     jp->jumpcost = cost2;
-    if (!jp->after_scanh(map_, node_id+jp->jump_step, jp_id2, cost2)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanh(map_, node_id+jp->jump_step, jp_id2, cost2)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
     if ((jp_id1 & jp_id2) != warthog::INF32) break;
 		// couldn't move in either straight dir; node_id is an obstacle
 		if(!(cost1 && cost2)) { node_id = jp_id1 = jp_id2 = warthog::INF32; break; 
@@ -794,11 +794,11 @@ jlp::jump_southwest(
 	if((neis & 197376) != 197376) { return; }
 
   G::cur_diag_gval = pa->get_g();
-  jp->v.init_before_diag(jps::SOUTH, jps::WEST);
-  jp->h.init_before_diag(jps::WEST, jps::SOUTH);
-
-  jp->setup(jp->v, jp->south.ga, jp->south.gb, jp->south.dC);
-  jp->setup(jp->h, jp->west.ga, jp->west.gb, jp->west.dC);
+  // jp->v.init_before_diag(jps::SOUTH, jps::WEST);
+  // jp->h.init_before_diag(jps::WEST, jps::SOUTH);
+  //
+  // jp->setup(jp->v, jp->south.ga, jp->south.gb, jp->south.dC);
+  // jp->setup(jp->h, jp->west.ga, jp->west.gb, jp->west.dC);
 
 	while(node_id != warthog::INF32)
 	{
@@ -855,38 +855,38 @@ jlp::__jump_southwest(
 	uint32_t mapw = map_->width();
 	uint32_t rmapw = rmap_->width();
 
-  if (jp->v.dominated() || jp->h.dominated()) {
-    jumpnode_id = warthog::INF32; jumpcost = 0; return;
-  }
+  // if (jp->v.dominated() || jp->h.dominated()) {
+  //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+  // }
 	while(true)
 	{
 		num_steps++;
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id + mapw - 1;
 		rnode_id = rnode_id - (rmapw + 1);
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
-    if ((!jp->v.next()) || (!jp->h.next())) {
-      jumpnode_id = warthog::INF32; jumpcost = 0; return;
-    }
+    // if ((!jp->v.next()) || (!jp->h.next())) {
+    //   jumpnode_id = warthog::INF32; jumpcost = 0; return;
+    // }
 		// recurse straight before stepping again diagonally;
 		// (ensures we do not miss any optimal turning points)
-    jp->before_scanv(rmap_, rnode_id, -1);
+    // jp->before_scanv(rmap_, rnode_id, -1);
 		__jump_south(rnode_id, rgoal_id, jp_id1, cost1, rmap_);
     jp->jumpcost = cost1;
-    if (!jp->after_scanv(rmap_, node_id+jp->jump_step*mapw, jp_id1, cost1)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanv(rmap_, node_id+jp->jump_step*mapw, jp_id1, cost1)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 
-    jp->before_scanh(map_, node_id, -1);
+    // jp->before_scanh(map_, node_id, -1);
 		__jump_west(node_id, goal_id, jp_id2, cost2, map_);
     jp->jumpcost = cost2;
-    if (!jp->after_scanh(map_, node_id-jp->jump_step, jp_id2, cost2)) {
-      jp_id1 = jp_id2 = jumpnode_id = INF32;
-      jumpcost = 0; return;
-    }
+    // if (!jp->after_scanh(map_, node_id-jp->jump_step, jp_id2, cost2)) {
+    //   jp_id1 = jp_id2 = jumpnode_id = INF32;
+    //   jumpcost = 0; return;
+    // }
 
 		if((jp_id1 & jp_id2) != warthog::INF32) { break; }
 		// couldn't move in either straight dir; node_id is an obstacle
