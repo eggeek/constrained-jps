@@ -162,33 +162,33 @@ class online_jump_point_locator2_prune2
 		uint32_t current_rgoal_id_;
 		uint32_t current_node_id_;
 		uint32_t current_rnode_id_;
-    // vector<bool> iscorner;
+    vector<bool> iscorner;
 
     // nxtjp[d][id] stores next jump point in direction `d` (NSEW) at `id`
     // vector<pair<uint32_t, cost_t>> nxtjp[4];
 
-    // vector<uint32_t> rmap2mapid;
+    vector<uint32_t> rmap2mapid;
 
     public:
     inline void init_tables() {
-      // rmap2mapid.resize(rmap_->height()*rmap_->width());
-      // iscorner.resize(map_->height()*map_->width());
-      // fill(rmap2mapid.begin(), rmap2mapid.end(), -1);
-      // fill(iscorner.begin(), iscorner.end(), false);
-      // int mh = map_->header_height();
-      // int mw = map_->header_width();
-      // for (int x=0; x<mw; x++)
-      // for (int y=0; y<mh; y++) {
-      //   uint32_t px, py, pid;// rpid;
-      //   pid = map_->to_padded_id(y*mw+x);
-      //   map_->to_padded_xy(pid, px, py);
-      //   // rpid = map_id_to_rmap_id(pid);
-      //
-      //   // assert(rpid < rmap2mapid.size());
-      //   // rmap2mapid[rpid] = pid;
-      //   assert(pid < iscorner.size());
-      //   iscorner[pid] = map_->is_corner(px, py);
-      // }
+      rmap2mapid.resize(rmap_->height()*rmap_->width());
+      iscorner.resize(map_->height()*map_->width());
+      fill(rmap2mapid.begin(), rmap2mapid.end(), -1);
+      fill(iscorner.begin(), iscorner.end(), false);
+      int mh = map_->header_height();
+      int mw = map_->header_width();
+      for (int x=0; x<mw; x++)
+      for (int y=0; y<mh; y++) {
+        uint32_t px, py, pid;// rpid;
+        pid = map_->to_padded_id(y*mw+x);
+        map_->to_padded_xy(pid, px, py);
+        // rpid = map_id_to_rmap_id(pid);
+
+        // assert(rpid < rmap2mapid.size());
+        // rmap2mapid[rpid] = pid;
+        assert(pid < iscorner.size());
+        iscorner[pid] = map_->is_corner(px, py);
+      }
 
       // // global::corner_gv.resize(map_->height()*map_->width());
       // // for (auto& it: global::corner_gv) {

@@ -149,7 +149,12 @@ extern warthog::pqueue_min* open;
   // set gvalue on corner point
   inline void set_corner_gv(uint32_t id, warthog::cost_t g) {
     warthog::search_node* n = nodepool->get_ptr(id);
-    if (n->get_search_number() != pi->instance_id_) {
+    if (n == nullptr) {
+      n = nodepool->generate(id);
+      n->init(pi->instance_id_, warthog::SN_ID_MAX, warthog::INFTY, warthog::INFTY);
+      n->set_g(g);
+    }
+    else if (n->get_search_number() != pi->instance_id_) {
       n->init(pi->instance_id_, warthog::SN_ID_MAX, warthog::INFTY, warthog::INFTY);
       n->set_g(g);
     }
