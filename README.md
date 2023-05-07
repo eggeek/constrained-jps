@@ -80,6 +80,7 @@ For ablation study, checkout following branches:
   - `jps-g`: diagonal caching on JPS
   - `cjps-b`: backwards scanning on CJPS
   - `cjps-g`: diagonal caching on CJPS
+All these variants in each branch are noted as `jps2-prune2`.
 
 Then call script `exp2-ablation.sh`:
 
