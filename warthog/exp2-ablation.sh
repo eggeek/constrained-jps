@@ -22,7 +22,7 @@ scens=(
   ./synthetic-data/diag-512-0.75.scen
 )
 algs=(jps2 jps2-prune2)
-sml_outdir="./small_output/variants/"
+sml_outdir="./ablation/"
 
 function gensmljobs() {
   rep=10
@@ -32,7 +32,7 @@ function gensmljobs() {
       mapname=$(basename -- $mpath)
       spath=${scens[$i]}
       for alg in "${algs[@]}"; do
-        outpath="${sml_outdir}/$alg/$r/"
+        outpath="${sml_outdir}/$alg/$r"
         mkdir -p ${outpath}
         cmd="./build/fast/bin/warthog --scen ${spath} --map ${mpath} --alg $alg > ${outpath}/${mapname}.log"
         echo $cmd
@@ -42,6 +42,7 @@ function gensmljobs() {
 }
 
 function runsmljobs() {
+  make clean && make fast -j
   gensmljobs | shuf > smljobs.sh
   chmod u+x smljobs.sh
   bash -x smljobs.sh
@@ -53,7 +54,7 @@ function small_suboptcnt() {
     mpath=${maps[$i]}
     mname=$(basename -- ${mpath})
     spath=${scens[$i]}
-    out_dir="small_suboptcnt/variants/"
+    out_dir="ablation/subopt_cnt"
     mkdir -p ${out_dir}
     cmd="./build/fast/bin/experiment ${mpath} ${spath} subcnt > ${out_dir}/$mname.log"
     echo "$cmd"
@@ -66,5 +67,5 @@ case "$1" in
   sub) small_suboptcnt ;;
   *)
     echo "Usage: $0 {time|sub}"
-    exit 1
+    exit 1 ;;
 esac
