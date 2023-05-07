@@ -465,8 +465,8 @@ jlp::__jump_northeast(
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id - mapw + 1;
 		rnode_id = rnode_id + rmapw + 1;
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
     if ((!jp->v.next()) || (!jp->h.next())) {
       jumpnode_id = warthog::INF32; jumpcost = 0; return;
@@ -602,8 +602,8 @@ jlp::__jump_northwest(
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id - mapw - 1;
 		rnode_id = rnode_id - (rmapw - 1);
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
     if ((!jp->v.next()) || (!jp->h.next())) {
       jumpnode_id = warthog::INF32; jumpcost = 0; return;
@@ -734,8 +734,8 @@ jlp::__jump_southeast(
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id + mapw + 1;
 		rnode_id = rnode_id + rmapw - 1;
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
     if ((!jp->v.next()) || (!jp->h.next())) {
       jumpnode_id = warthog::INF32; jumpcost = 0; return;
@@ -864,8 +864,8 @@ jlp::__jump_southwest(
     G::cur_diag_gval += DBL_ROOT_TWO;
 		node_id = node_id + mapw - 1;
 		rnode_id = rnode_id - (rmapw + 1);
-    // if (iscorner[node_id])
-    //   global::query::set_corner_gv(node_id, G::cur_diag_gval);
+    if (iscorner[node_id])
+      global::query::set_corner_gv(node_id, G::cur_diag_gval);
 
     if ((!jp->v.next()) || (!jp->h.next())) {
       jumpnode_id = warthog::INF32; jumpcost = 0; return;
