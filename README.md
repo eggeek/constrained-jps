@@ -1,28 +1,31 @@
 # Source code
+
+The implementation is based on [warthog](https://bitbucket.org/dharabor/pathfinding/src/master/warthog/).
+
 ```
-├── maps
+├── maps/
 ├── README.md
-├── scenarios
-└── warthog
+├── scenarios/
+└── warthog/
 ```
 - `maps`, `scenarios` store benchmark from `movingAI` and `IRON`
 - `warthog` stores all source files
 
 # Compile
 
-Go to source file director: `cd warthog`
+Go to source file directory: `cd warthog`
 - To run benchmark: 
     - make fast: run in fast mode, without collecting statistic on scanning
     - make fastcnt: run in fast mode but collect statistic on scanning
 - To debug: make dev
 - To clean: make clean
 
-Once compiled, run ./build/<dev|fast>/bin/warthog for a list of command line parameters. 
+Once compiled, run `./build/<dev|fast>/bin/warthog` for a list of command line parameters. 
 A simple case is the following:
 
-./bin/warthog --scen <scen file> --map <map file> --alg <alg name>
+`./bin/warthog --scen <scen file> --map <map file> --alg <alg name>`
 
-Where map files are end with '.map', and scen file are end with '.scen'.
+Where map files are end with `.map`, and scenario files are end with `.scen`.
 
 Algorithms are:
   - `--alg jps2`: JPS with block based scanning
