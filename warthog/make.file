@@ -1,18 +1,18 @@
 # -*- mode: makefile -*-
 
-all: main convert extras test
+all: main
 
 .PHONY: clean
 clean:
 	@-$(RM) -rf ./obj/*
 
-main: bin/warthog bin/roadhog bin/mapf bin/experiment
+main: bin/warthog bin/experiment
 
-extras: bin/ch bin/fifo bin/make_cpd
+# extras: bin/ch bin/fifo bin/make_cpd
 
-convert: bin/dimacs2xy bin/dimacs2metis bin/grid2graph
+# convert: bin/dimacs2xy bin/dimacs2metis bin/grid2graph
 
-test: bin/tests test/cpd_search
+# test: bin/tests test/cpd_search
 
 $(warthog): $(WARTHOG_OBJ)
 	@echo "###  Archiving object files: $(warthog) ###"

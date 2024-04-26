@@ -3,6 +3,7 @@
 
 #include "getopt.h"
 
+#include <cstdint>
 #include <iostream>
 #include <map>
 #include <vector>

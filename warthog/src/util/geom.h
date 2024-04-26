@@ -9,6 +9,7 @@
 // @created 2016-07-31
 //
 
+#include <cstdint>
 #include <istream>
 #include <ostream>
 #include <float.h>
