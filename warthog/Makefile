@@ -20,7 +20,7 @@ warthog = ./lib/libwarthog.a
 extra = ./lib/libwarthog-extra.a
 
 CFLAGS = -std=c++11 -pedantic -pthread -Wall -Wno-conversion \
-	-Wno-unused-result -Wno-unused-but-set-variable -fopenmp
+	-Wno-unused-result -Wno-unused-but-set-variable
 # PROFILE_CFLAGS = $(DEV_CFLAGS) -pg -DNDEBUG
 
 FLAVOURS = fast dev debug

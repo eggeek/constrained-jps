@@ -51,22 +51,7 @@ help()
         << "map/scenario format from the 2014 Grid-based Path Planning Competition\n\n";
 
 	std::cerr 
-    << "The following are valid parameters for SOLVING instances:\n"
-	<< "\t--alg [alg] (required)\n"
-    << "\t--scen [scen file] (required) \n"
-    << "\t--map [map file] (optional; specify this to override map values in scen file) \n"
-	<< "\t--checkopt (optional; compare solution costs against values in the scen file)\n"
-	<< "\t--verbose (optional; prints debugging info when compiled with debug symbols)\n"
-    << "Invoking the program this way solves all instances in [scen file] with algorithm [alg]\n"
-    << "Currently recognised values for [alg]:\n"
-    << "\tcbs_ll, cbs_ll_w, dijkstra, astar, astar_wgm, astar4c, sipp\n"
-    << "\tsssp, jps, jps2, jps+, jps2+, jps, jps4c\n"
-    << "\tdfs, gdfs\n\n"
-    << ""
-    << "The following are valid parameters for GENERATING instances:\n"
-    << "\t --gen [map file (required)]\n"
-    << "Invoking the program this way generates at random 1000 valid problems for \n"
-    << "gridmap [map file]\n";
+    << "Check README.md\n";
 }
 
 bool
