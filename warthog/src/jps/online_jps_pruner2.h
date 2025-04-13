@@ -60,7 +60,7 @@ struct Constraint2 {
   // make s step from ai, check whether it is better reached from b 
   inline bool better_from_b(int s) const {
     assert(s <= jlimt());
-    int d1 = d - i - s + 1;
+    int d1 = d - i - s;
     int d2 = i - 1;
     int dia = min(d1, d2);
     cost_t from_b = gb + dia * DBL_ROOT_TWO + (d1 + d2 - (dia<<1) + 1);
