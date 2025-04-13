@@ -199,7 +199,7 @@ public:
       if ((int)jump_step < v.jlimt()) {
         if (v.better_from_b(jump_step)) {
           int dy = v.i-1;
-          int dx = v.d-v.i-jump_step+1;
+          int dx = v.d-v.i-jump_step;
           update_constraint(v, dx, dy, (cost_t)jump_step, global::query::gval(node_id));
           jpid = INF32;
           if (v.dominated()) return false;
@@ -226,7 +226,7 @@ public:
       if ((int)jump_step < h.jlimt()) {
         if (h.better_from_b(jump_step)) {
           int dy = h.i-1;
-          int dx = h.d-h.i-jump_step+1;
+          int dx = h.d-h.i-jump_step;
           update_constraint(h, dx, dy, (cost_t)jump_step, global::query::gval(node_id));
           jpid = INF32;
           if (h.dominated()) return false;
